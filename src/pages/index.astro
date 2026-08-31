@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Hero from '../components/Hero.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Work from '../components/Work.astro';
+import Writing from '../components/Writing.astro';
+
+const title = 'Adam Secada — Builder + Operator';
+const description = 'Adam Secada builds interesting things at the intersection of AI, technology, and business.';
+---
+
+<BaseLayout {title} {description}>
+  <div id="top"></div>
+  <SiteHeader />
+  <main id="main-content">
+    <Hero />
+    <About />
+    <Work />
+    <Writing />
+    <Contact />
+  </main>
+  <SiteFooter />
+</BaseLayout>

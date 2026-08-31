@@ -1,0 +1,48 @@
+---
+import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+import ibmPlexMonoLatin from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2?url';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const localFontFaces = `
+  @font-face {
+    font-family: 'Space Grotesk Variable';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300 700;
+    src: url('${spaceGroteskLatin}') format('woff2-variations');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 500;
+    src: url('${ibmPlexMonoLatin}') format('woff2');
+  }
+`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#111012" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preload" href={spaceGroteskLatin} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={localFontFaces} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <slot />
+  </body>
+</html>

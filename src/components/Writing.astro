@@ -1,0 +1,20 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { writingEntries } from '../data/site';
+---
+
+<section id="writing" class="section section--writing page-shell" aria-labelledby="writing-title">
+  <SectionHeading number="03" title="Writing / Thinking" id="writing-title" />
+  <div class="writing-grid">
+    <p class="writing-grid__statement">Notes from the overlap between building, operating, and figuring things out.</p>
+    <div class="writing-list">
+      {writingEntries.map((entry) => (
+        <article class="writing-entry">
+          <span class="micro-label">ARCHIVE / SOON</span>
+          <h3>{entry.placeholder ? entry.label : <a href={entry.url}>{entry.label}</a>}</h3>
+          <p>{entry.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

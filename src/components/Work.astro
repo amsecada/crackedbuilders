@@ -1,0 +1,42 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { experiments, featuredProjects } from '../data/site';
+---
+
+<section id="work" class="section section--work page-shell" aria-labelledby="work-title">
+  <SectionHeading number="02" title="Work" id="work-title" />
+  <p class="section-intro">Projects, experiments, and useful artifacts. The workbench is still being organized.</p>
+
+  <div class="featured-list">
+    {featuredProjects.map((project, index) => (
+      <article class="featured-project">
+        <div class="featured-project__visual" aria-hidden="true">
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <i></i>
+        </div>
+        <div class="featured-project__content">
+          <div class="featured-project__meta micro-label">
+            <span>{project.status}</span>
+            <span>{project.category}</span>
+          </div>
+          <h3>
+            {project.placeholder ? project.label : <a href={project.url}>{project.label}</a>}
+          </h3>
+          <p>{project.description}</p>
+          {project.placeholder && <span class="placeholder-label">DETAILS FORTHCOMING</span>}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="experiment-list" aria-label="Smaller experiments">
+    {experiments.map((experiment, index) => (
+      <article class="experiment-row">
+        <span class="experiment-row__index micro-label">{String(index + 1).padStart(2, '0')}</span>
+        <h3>{experiment.placeholder ? experiment.label : <a href={experiment.url}>{experiment.label}</a>}</h3>
+        <p>{experiment.description}</p>
+        <span class="experiment-row__status micro-label">FORTHCOMING</span>
+      </article>
+    ))}
+  </div>
+</section>

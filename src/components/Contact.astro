@@ -1,0 +1,19 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { contactLinks } from '../data/site';
+---
+
+<section id="contact" class="section section--contact page-shell" aria-labelledby="contact-title">
+  <SectionHeading number="04" title="Contact" id="contact-title" />
+  <p class="contact-callout">Building something <em>interesting?</em></p>
+  <p class="contact-response">Ping me<span aria-hidden="true">.</span></p>
+  <div class="contact-footer">
+    <p>Interesting project, weird idea, or something I should know about?</p>
+    <ul aria-label="Contact links">
+      {contactLinks.map((link) => (
+        <li>{link.placeholder ? <span>{link.label}</span> : <a href={link.url}>{link.label}</a>}</li>
+      ))}
+    </ul>
+  </div>
+  <i class="contact-slash" aria-hidden="true"></i>
+</section>
