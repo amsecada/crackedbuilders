@@ -1,6 +1,6 @@
 # Work Log
 
-> **Maintenance note:** Update this file after every feature build so it remains an accurate record of completed work.
+> **Maintenance note:** Update this file after every feature build so it remains an accurate record of completed work. Give each new top-level entry an ISO 8601 timestamp with its UTC offset so entries remain chronologically sortable and auditable.
 
 ## Initial Website Layout
 
@@ -60,3 +60,24 @@
 - Produced a successful static production build.
 - Verified generated anchor links and target IDs, the final font payload, and clean patch whitespace.
 
+## GitHub Pages Publication and Regression Suite — 2026-08-31T12:18:01-05:00
+
+### Publication configuration
+
+- Configured Astro for the `https://amsecada.github.io/crackedbuilders/` GitHub project-site URL, including the repository base path required for generated assets.
+- Added a GitHub Actions workflow that validates pull requests and pushes targeting `master`.
+- Gated the Pages artifact upload and deployment on the complete verification suite, so failed checks cannot publish the site.
+- Kept generated files in the ignored `dist/` directory and documented why the product-documentation directory at `docs/` is not a Pages publishing source.
+
+### Automated regression coverage
+
+- Added Playwright browser testing with mobile and desktop viewport projects against the production Astro preview.
+- Added a data-driven primary-navigation test that discovers every menu item and verifies its fragment, unique target inside `main`, URL behavior, visibility, and sticky-header clearance.
+- Added Linkinator checks for internal resources, CSS assets, links, and fragment targets across the generated site.
+- Added a single `npm run verify` command that runs Astro and TypeScript analysis, produces a clean static build, checks links, and executes browser regression tests.
+- Ignored local Playwright reports and test artifacts while retaining failures in CI output.
+- Confirmed the navigation guard by temporarily introducing a missing Writing target, observing failures at both viewport sizes, restoring the target, and rerunning the clean suite.
+
+## Work-log Timestamp Convention — 2026-08-31T12:18:01-05:00
+
+- Documented the requirement to timestamp every future top-level work-log entry using ISO 8601 with an explicit UTC offset.

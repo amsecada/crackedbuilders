@@ -7,7 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "playwright test",
+    "test:links": "start-server-and-test \"vite preview --host 127.0.0.1 --port 4174 --strictPort --base /crackedbuilders/\" http://127.0.0.1:4174/crackedbuilders/ \"linkinator http://127.0.0.1:4174/crackedbuilders/ --recurse --check-css --check-fragments --skip ^https://amsecada.github.io/crackedbuilders/$\"",
+    "verify": "npm run check && npm run build && npm run test:links && npm test"
   },
   "dependencies": {
     "@fontsource-variable/space-grotesk": "^5.2.8",
@@ -16,6 +19,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.4.0",
+    "linkinator": "^8.1.0",
+    "start-server-and-test": "^3.0.12",
     "typescript": "^5.9.2"
   }
 }
