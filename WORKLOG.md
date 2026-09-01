@@ -81,3 +81,12 @@
 ## Work-log Timestamp Convention — 2026-08-31T12:18:01-05:00
 
 - Documented the requirement to timestamp every future top-level work-log entry using ISO 8601 with an explicit UTC offset.
+
+## Collapsible Long-form Writing Reader — 2026-09-01T02:10:00+00:00
+
+- Replaced the Writing placeholder with the complete “We Rebuilt Corporate Bureaucracy Out of Tokens” essay from Issue #4.
+- Kept the single-page site scannable by placing the essay in a native, keyboard-accessible disclosure.
+- Added a height-capped, independently scrollable reading surface with sticky metadata so opening the essay does not turn the homepage into an extreme scroll.
+- Created responsive editorial typography, section rhythm, article lists, rules, and end matter consistent with the existing black, white, gray, and restrained-purple visual system.
+- Kept the experience framework-free and dependency-free, with motion disabled by the existing reduced-motion preference.
+
