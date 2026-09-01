@@ -39,3 +39,25 @@ test('every primary menu item reaches a unique anchor inside main', async ({ pag
     ).toBeGreaterThanOrEqual(headerBox!.y + headerBox!.height);
   }
 });
+
+test('social profiles resolve externally while LinkedIn remains offline', async ({ page }) => {
+  await page.goto('./');
+
+  const socialLinks = page.getByRole('list', { name: 'Social links' });
+  const expectedProfiles = [
+    ['X / Twitter', 'https://x.com/AdamSecada'],
+    ['TikTok', 'https://www.tiktok.com/@doublecli.cc'],
+    ['Instagram', 'https://www.instagram.com/adam.secada/'],
+  ];
+
+  for (const [label, url] of expectedProfiles) {
+    const link = socialLinks.getByRole('link', { name: new RegExp(label, 'i') });
+    await expect(link).toHaveAttribute('href', url);
+    await expect(link).toHaveAttribute('target', '_blank');
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  }
+
+  await expect(socialLinks.getByText('LinkedIn')).toBeVisible();
+  await expect(socialLinks.getByRole('link', { name: /LinkedIn/i })).toHaveCount(0);
+  await expect(socialLinks.getByText('Offline / rebuilding')).toBeVisible();
+});

@@ -90,3 +90,9 @@
 - Created responsive editorial typography, section rhythm, article lists, rules, and end matter consistent with the existing black, white, gray, and restrained-purple visual system.
 - Kept the experience framework-free and dependency-free, with motion disabled by the existing reduced-motion preference.
 
+## Social Profile Links — 2026-09-01T07:39:00-04:00
+
+- Replaced the contact placeholder with Adam's active X, TikTok, and Instagram profiles.
+- Kept LinkedIn visible as an intentionally offline channel while its replacement account is being prepared.
+- Added a compact technical index, profile handles, outbound indicators, and restrained hover/focus movement to the bottom contact section.
+- Opened active profiles in a new tab with safe external-link attributes and added browser regression coverage for every destination.

@@ -36,12 +36,14 @@ export type WritingEntry = PublishedEntry | PlaceholderEntry;
 export interface ContactLink {
   placeholder: false;
   label: string;
+  handle: string;
   url: string;
 }
 
 export interface ContactPlaceholder {
   placeholder: true;
   label: string;
+  handle: string;
   url?: never;
 }
 
@@ -80,10 +82,28 @@ export const writingEntries: WritingEntry[] = [
   },
 ];
 
-// PLACEHOLDER: Replace with a real email and active social profiles.
 export const contactLinks: Array<ContactLink | ContactPlaceholder> = [
   {
+    placeholder: false,
+    label: 'X / Twitter',
+    handle: '@AdamSecada',
+    url: 'https://x.com/AdamSecada',
+  },
+  {
+    placeholder: false,
+    label: 'TikTok',
+    handle: '@doublecli.cc',
+    url: 'https://www.tiktok.com/@doublecli.cc',
+  },
+  {
+    placeholder: false,
+    label: 'Instagram',
+    handle: '@adam.secada',
+    url: 'https://www.instagram.com/adam.secada/',
+  },
+  {
     placeholder: true,
-    label: 'Contact details coming soon',
+    label: 'LinkedIn',
+    handle: 'Offline / rebuilding',
   },
 ];
