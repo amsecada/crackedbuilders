@@ -1,20 +1,45 @@
 ---
 import SectionHeading from './SectionHeading.astro';
-import { writingEntries } from '../data/site';
+import AgentProductivityArticle from '../content/we-rebuilt-corporate-bureaucracy.md';
 ---
 
 <section id="writing" class="section section--writing page-shell" aria-labelledby="writing-title">
   <SectionHeading number="03" title="Writing / Thinking" id="writing-title" />
   <div class="writing-grid">
     <p class="writing-grid__statement">Notes from the overlap between building, operating, and figuring things out.</p>
+
     <div class="writing-list">
-      {writingEntries.map((entry) => (
-        <article class="writing-entry">
-          <span class="micro-label">ARCHIVE / SOON</span>
-          <h3>{entry.placeholder ? entry.label : <a href={entry.url}>{entry.label}</a>}</h3>
-          <p>{entry.description}</p>
-        </article>
-      ))}
+      <details class="writing-feature">
+        <summary class="writing-feature__summary">
+          <span class="writing-feature__meta micro-label">
+            <span>ESSAY / 001</span>
+            <span>11 MIN READ</span>
+          </span>
+          <span class="writing-feature__title">We Rebuilt Corporate Bureaucracy Out of Tokens</span>
+          <span class="writing-feature__dek">
+            AI agents can make individual tasks dramatically faster while making the overall system more expensive.
+            DevOps learned this lesson decades ago: optimize the constraint, not the activity.
+          </span>
+          <span class="writing-feature__action micro-label" aria-hidden="true">
+            <span class="writing-feature__action-open">Read the essay <b>+</b></span>
+            <span class="writing-feature__action-close">Close the essay <b>−</b></span>
+          </span>
+        </summary>
+
+        <div class="article-reader">
+          <div class="article-reader__chrome micro-label">
+            <span>LONGFORM / 001</span>
+            <span>SCROLL TO READ</span>
+          </div>
+          <article class="article-body">
+            <AgentProductivityArticle />
+            <footer class="article-end" aria-label="End of essay">
+              <span class="micro-label">END / 001</span>
+              <span aria-hidden="true">/</span>
+            </footer>
+          </article>
+        </div>
+      </details>
     </div>
   </div>
 </section>
