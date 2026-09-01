@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "playwright test",
-    "test:links": "start-server-and-test \"vite preview --host 127.0.0.1 --port 4174 --strictPort --base /crackedbuilders/\" http://127.0.0.1:4174/crackedbuilders/ \"linkinator http://127.0.0.1:4174/crackedbuilders/ --recurse --check-css --check-fragments --skip ^https://amsecada.github.io/crackedbuilders/$\"",
+    "test:links": "start-server-and-test \"vite preview --host 127.0.0.1 --port 4174 --strictPort --base /crackedbuilders/\" http://127.0.0.1:4174/crackedbuilders/ \"linkinator http://127.0.0.1:4174/crackedbuilders/ --recurse --check-css --check-fragments --skip '^https://amsecada\\.github\\.io/crackedbuilders/$' --skip '^https://x\\.com/AdamSecada$' --skip '^https://www\\.tiktok\\.com/@doublecli\\.cc$' --skip '^https://www\\.instagram\\.com/adam\\.secada/$'\"",
     "verify": "npm run check && npm run build && npm run test:links && npm test"
   },
   "dependencies": {
