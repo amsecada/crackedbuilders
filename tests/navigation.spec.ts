@@ -48,6 +48,7 @@ test('social profiles resolve externally while LinkedIn remains offline', async 
     ['X / Twitter', 'https://x.com/AdamSecada'],
     ['TikTok', 'https://www.tiktok.com/@doublecli.cc'],
     ['Instagram', 'https://www.instagram.com/adam.secada/'],
+    ['Facebook', 'https://www.facebook.com/adamsecada'],
   ];
 
   for (const [label, url] of expectedProfiles) {
@@ -60,4 +61,27 @@ test('social profiles resolve externally while LinkedIn remains offline', async 
   await expect(socialLinks.getByText('LinkedIn')).toBeVisible();
   await expect(socialLinks.getByRole('link', { name: /LinkedIn/i })).toHaveCount(0);
   await expect(socialLinks.getByText('Offline / rebuilding')).toBeVisible();
+});
+
+test('essay opens outside page flow and supports navigation and dismissal', async ({ page }) => {
+  await page.goto('./');
+  const trigger = page.getByRole('button', { name: /ESSAY \/ 001/ });
+  await trigger.scrollIntoViewIfNeeded();
+  const height = await page.locator('body').evaluate(element => element.scrollHeight);
+  await trigger.click();
+  const reader = page.getByRole('dialog');
+  await expect(reader).toBeVisible();
+  expect(await page.locator('body').evaluate(element => element.scrollHeight)).toBe(height);
+  const box = await reader.boundingBox();
+  expect(box!.width).toBeGreaterThan(Math.min(900, page.viewportSize()!.width - 32));
+  await page.getByLabel('Jump to section').selectOption({ index: 2 });
+  expect(await reader.evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+  await expect(reader.getByRole('button', { name: 'Close', exact: true })).toBeInViewport();
+  await page.keyboard.press('Escape');
+  await expect(reader).not.toBeVisible();
+  await expect(trigger).toBeFocused();
+  await trigger.click();
+  await reader.getByRole('button', { name: 'Close', exact: true }).click();
+  await expect(reader).not.toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

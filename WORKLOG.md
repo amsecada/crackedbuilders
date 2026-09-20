@@ -96,3 +96,13 @@
 - Kept LinkedIn visible as an intentionally offline channel while its replacement account is being prepared.
 - Added a compact technical index, profile handles, outbound indicators, and restrained hover/focus movement to the bottom contact section.
 - Opened active profiles in a new tab with safe external-link attributes and added browser regression coverage for every destination.
+
+## Writing Reader, Project Highlights, and Facebook — 2026-09-19T20:10:00-04:00
+
+- Logged Adam's three requests and remaining content needs in `docs/ISSUES.md`.
+- Replaced the inline essay disclosure with a wide native modal dialog. Added a persistent close button, Escape and backdrop dismissal, section navigation, background scroll locking, and focus restoration without increasing homepage height.
+- Widened the desktop essay preview column and retained a full-screen reader on narrow phones.
+- Added Baseline AI and Streamdust project highlights with 16:9 artwork placeholders, forthcoming ZIP download text, invite-only availability, and a compact future-tools entry. Documented 1600 × 900 px image replacement instructions in the README.
+- Added Facebook immediately before the offline LinkedIn entry.
+- Passed Astro checks, production build, internal link checks, and all six mobile/desktop Playwright tests. Visually reviewed reader screenshots at 320 and 1440 px and project cards at 768 and 1440 px; measured reader overflow at all three sizes with none found.
+- Changes remain local; images and the ZIP download destination still need to be supplied.

@@ -25,3 +25,11 @@ In the repository settings, select **GitHub Actions** as the Pages build and dep
 Content placeholders are centralized in `src/data/site.ts` and intentionally remain non-clickable until real project, writing, and contact details are supplied.
 
 > **Maintenance note:** Update `WORKLOG.md` after every feature build so it remains an accurate record of completed work. Give each new top-level entry an ISO 8601 timestamp with its UTC offset (for example, `2026-08-31T12:18:01-05:00`) so changes remain chronologically sortable and auditable.
+
+## Project highlights
+
+Baseline AI and Streamdust are configured in `src/data/site.ts`. Supply **1600 × 900 px (16:9)** images, preferably WebP, under `public/images/`, then add `image: { src: 'images/filename.webp', alt: 'Description of the project screenshot' }` to each entry. Keep important details away from the edges for cropping.
+
+Baseline's ZIP destination remains forthcoming until the file or URL is supplied. Streamdust remains invite-only without a public destination. No placeholder links are published.
+
+Writing opens in a native modal dialog with an independently scrolling article, section picker, persistent Close button, Escape dismissal, and focus restoration to the article card.

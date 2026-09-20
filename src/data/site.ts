@@ -4,7 +4,8 @@ export type ProjectStatus =
   | 'LIVE'
   | 'ARCHIVED'
   | 'RESEARCH'
-  | 'PROTOTYPE';
+  | 'PROTOTYPE'
+  | 'INVITE ONLY';
 
 interface LinkableEntry {
   label: string;
@@ -24,6 +25,8 @@ export interface PlaceholderEntry extends LinkableEntry {
 export interface FeaturedProjectBase extends LinkableEntry {
   status: ProjectStatus;
   category: string;
+  availability: string;
+  image?: { src: string; alt: string };
 }
 
 export type FeaturedProject =
@@ -47,29 +50,33 @@ export interface ContactPlaceholder {
   url?: never;
 }
 
-// PLACEHOLDER: Replace these entries with Adam's real work before publishing.
+// PLACEHOLDER: Add project images and real destinations when supplied.
+// Images: 1600 × 900 px (16:9), stored in public/images/.
 export const featuredProjects: FeaturedProject[] = [
   {
     placeholder: true,
-    label: 'Selected work is being assembled.',
-    description:
-      'Projects, experiments, and the useful details behind them will live here.',
+    label: 'Baseline AI',
+    description: 'An AI extension that puts guardrails and best practices in place for new AI users.',
     status: 'BUILDING',
-    category: 'PROJECT ARCHIVE',
+    category: 'AI EXTENSION',
+    availability: 'ZIP download forthcoming',
+  },
+  {
+    placeholder: true,
+    label: 'Streamdust',
+    description: 'A delightful media platform for classic TV and movies. Free to browse and play.',
+    status: 'INVITE ONLY',
+    category: 'MEDIA PLATFORM',
+    availability: 'By invite only at the moment',
   },
 ];
 
-// PLACEHOLDER: Keep entries non-linkable until real project details are supplied.
+// PLACEHOLDER: Future tools stay non-linkable until supplied.
 export const experiments: Experiment[] = [
   {
     placeholder: true,
-    label: 'Experiments in AI',
-    description: 'Notes and working artifacts forthcoming.',
-  },
-  {
-    placeholder: true,
-    label: 'Systems and small business',
-    description: 'Fieldwork forthcoming.',
+    label: 'Other awesome tools',
+    description: 'More to come.',
   },
 ];
 
@@ -100,6 +107,12 @@ export const contactLinks: Array<ContactLink | ContactPlaceholder> = [
     label: 'Instagram',
     handle: '@adam.secada',
     url: 'https://www.instagram.com/adam.secada/',
+  },
+  {
+    placeholder: false,
+    label: 'Facebook',
+    handle: '@adamsecada',
+    url: 'https://www.facebook.com/adamsecada',
   },
   {
     placeholder: true,

@@ -9,8 +9,8 @@ import AgentProductivityArticle from '../content/we-rebuilt-corporate-bureaucrac
     <p class="writing-grid__statement">Notes from the overlap between building, operating, and figuring things out.</p>
 
     <div class="writing-list">
-      <details class="writing-feature">
-        <summary class="writing-feature__summary">
+      <div class="writing-feature">
+        <button class="writing-feature__summary" type="button" aria-haspopup="dialog" aria-controls="essay-reader">
           <span class="writing-feature__meta micro-label">
             <span>ESSAY / 001</span>
             <span>11 MIN READ</span>
@@ -22,24 +22,60 @@ import AgentProductivityArticle from '../content/we-rebuilt-corporate-bureaucrac
           </span>
           <span class="writing-feature__action micro-label" aria-hidden="true">
             <span class="writing-feature__action-open">Read the essay <b>+</b></span>
-            <span class="writing-feature__action-close">Close the essay <b>−</b></span>
-          </span>
-        </summary>
 
-        <div class="article-reader">
+          </span>
+        </button>
+
+        <dialog class="article-reader" id="essay-reader" aria-label="We Rebuilt Corporate Bureaucracy Out of Tokens">
           <div class="article-reader__chrome micro-label">
             <span>LONGFORM / 001</span>
-            <span>SCROLL TO READ</span>
+            <button type="button" class="reader-close" autofocus>Close <span aria-hidden="true">×</span></button>
           </div>
-          <article class="article-body">
+          <nav class="reader-navigation" aria-label="Essay sections"><label for="essay-section">Jump to section</label><select id="essay-section"><option value="">Start of essay</option></select></nav>
+          <article class="article-body" tabindex="-1">
             <AgentProductivityArticle />
             <footer class="article-end" aria-label="End of essay">
-              <span class="micro-label">END / 001</span>
+              <button type="button" class="reader-close micro-label">Back to writing</button>
               <span aria-hidden="true">/</span>
             </footer>
           </article>
-        </div>
-      </details>
+        </dialog>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const reader = document.querySelector<HTMLDialogElement>('#essay-reader')!;
+  const trigger = document.querySelector<HTMLButtonElement>('[aria-controls="essay-reader"]')!;
+  const sectionSelect = reader.querySelector<HTMLSelectElement>('select')!;
+  const article = reader.querySelector<HTMLElement>('.article-body')!;
+  const headings = [...article.querySelectorAll<HTMLElement>('h2')];
+  headings.forEach((heading, index) => {
+    heading.id ||= `essay-section-${index + 1}`;
+    sectionSelect.add(new Option(heading.textContent ?? '', heading.id));
+  });
+  trigger.addEventListener('click', () => {
+    reader.showModal();
+    document.documentElement.classList.add('reader-open');
+    reader.scrollTop = 0;
+    sectionSelect.value = '';
+  });
+  reader.querySelectorAll('.reader-close').forEach(button => {
+    button.addEventListener('click', () => reader.close());
+  });
+  reader.addEventListener('click', event => {
+    const bounds = reader.getBoundingClientRect();
+    if (event.target === reader && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) reader.close();
+  });
+  reader.addEventListener('close', () => {
+    document.documentElement.classList.remove('reader-open');
+    trigger.focus({ preventScroll: true });
+  });
+  sectionSelect.addEventListener('change', () => {
+    const target = headings.find(heading => heading.id === sectionSelect.value) ?? article;
+    target.setAttribute('tabindex', '-1');
+    target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    target.focus({ preventScroll: true });
+  });
+</script>
