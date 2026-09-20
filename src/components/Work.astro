@@ -1,6 +1,7 @@
 ---
 import SectionHeading from './SectionHeading.astro';
 import { experiments, featuredProjects } from '../data/site';
+const assetBase = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
 <section id="work" class="section section--work page-shell" aria-labelledby="work-title">
@@ -11,7 +12,16 @@ import { experiments, featuredProjects } from '../data/site';
     {featuredProjects.map((project, index) => (
       <article class="featured-project">
         <div class="featured-project__visual">
-          {project.image ? <img src={`${import.meta.env.BASE_URL}${project.image.src}`} alt={project.image.alt} width="1600" height="900" loading="lazy" /> : <>
+          {project.image ? <img
+            src={`${assetBase}${project.image.src}`}
+            srcset={project.image.widths.map(width => `${assetBase}images/${project.image!.name}-${width}.webp ${width}w`).join(', ')}
+            sizes="(min-width: 1600px) 955px, (min-width: 1024px) 60vw, (min-width: 768px) 50vw, 92vw"
+            alt={project.image.alt}
+            width="640"
+            height="360"
+            loading="lazy"
+            decoding="async"
+          /> : <>
           <span>{String(index + 1).padStart(2, '0')}</span>
           <i aria-hidden="true"></i>
           <span class="project-image-placeholder">Project image forthcoming</span>

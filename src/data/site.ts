@@ -26,7 +26,7 @@ export interface FeaturedProjectBase extends LinkableEntry {
   status: ProjectStatus;
   category: string;
   availability: string;
-  image?: { src: string; alt: string };
+  image?: { src: string; alt: string; widths: number[]; name: string };
 }
 
 export type FeaturedProject =
@@ -50,12 +50,12 @@ export interface ContactPlaceholder {
   url?: never;
 }
 
-// PLACEHOLDER: Add project images and real destinations when supplied.
-// Images: 1600 × 900 px (16:9), stored in public/images/.
+// Destinations remain unavailable until supplied. Artwork is optimized to 16:9 WebP.
 export const featuredProjects: FeaturedProject[] = [
   {
     placeholder: true,
     label: 'Baseline AI',
+    image: { src: 'images/baseline-640.webp', alt: 'Baseline wordmark', widths: [320, 640], name: 'baseline' },
     description: 'An AI extension that puts guardrails and best practices in place for new AI users.',
     status: 'BUILDING',
     category: 'AI EXTENSION',
@@ -64,6 +64,7 @@ export const featuredProjects: FeaturedProject[] = [
   {
     placeholder: true,
     label: 'Streamdust',
+    image: { src: 'images/streamdust-1200.webp', alt: 'Streamdust wordmark', widths: [320, 640, 1200], name: 'streamdust' },
     description: 'A delightful media platform for classic TV and movies. Free to browse and play.',
     status: 'INVITE ONLY',
     category: 'MEDIA PLATFORM',

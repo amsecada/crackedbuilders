@@ -324,10 +324,12 @@ ul {
 .featured-project {
   display: grid;
   border: 1px solid var(--color-rule);
+  transition: border-color 240ms ease, background-color 240ms ease;
 }
 
 .featured-project__visual {
   position: relative;
+  min-width: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-bottom: 1px solid var(--color-rule);
@@ -356,10 +358,13 @@ ul {
 .featured-project__visual::before,
 .featured-project__visual::after {
   position: absolute;
+  z-index: 1;
+  pointer-events: none;
   width: 2rem;
   height: 2rem;
   border-color: var(--color-text);
   content: '';
+  transition: color 240ms ease, transform 320ms ease;
 }
 
 .featured-project__visual::before {
@@ -944,7 +949,32 @@ a.social-link:focus-visible .social-link__platform {
 
 /* Project artwork keeps the same crop when real images are supplied. */
 .featured-list { display: grid; gap: 2rem; }
-.featured-project__visual img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.featured-project__visual img { display: block; width: 100%; height: 100%; object-fit: contain; background: #111416; transition: transform 450ms ease; }
+
+/* Purely visual feedback: unavailable projects remain honest, non-clickable cards. */
+.featured-project:focus-within {
+  border-color: var(--color-accent);
+  background-color: var(--color-surface);
+}
+.featured-project:focus-within .featured-project__visual::before,
+.featured-project:focus-within .featured-project__visual::after {
+  color: var(--color-accent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .featured-project:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-surface);
+  }
+  .featured-project:hover .featured-project__visual::before,
+  .featured-project:hover .featured-project__visual::after {
+    color: var(--color-accent);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .featured-project:hover .featured-project__visual img { transform: scale(1.025); }
+  .featured-project:hover .featured-project__visual::before { transform: translate(-4px, 4px); }
+  .featured-project:hover .featured-project__visual::after { transform: translate(4px, -4px); }
+}
 .featured-project__visual .project-image-placeholder { top: auto; bottom: 1.25rem; left: 3.5rem; }
 .featured-project__meta { gap: 1rem; flex-wrap: wrap; }
 .writing-feature__summary { width: 100%; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; }
